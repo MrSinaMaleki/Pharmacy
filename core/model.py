@@ -5,10 +5,14 @@ class Model(ABC):
     @classmethod
     @property
     @abstractmethod
-    def store(cls):
+    def store(cls): # noqa
         raise NotImplemented("'store' attr is required ! ")
 
     def __new__(cls, *args, **kwargs):
         instance = super().__new__(cls)
-        cls.store.append(instance)
+        print("instance: ", instance)
+        cls.store.append(instance) # noqa
         return instance
+
+
+
