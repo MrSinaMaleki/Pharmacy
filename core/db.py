@@ -1,6 +1,5 @@
 import pickle
-from .filehandler import Editor
-
+from core.model import Model
 
 class DataBase:
     __store = {}
@@ -9,12 +8,12 @@ class DataBase:
     def __init__(self, path: str) -> None:
         self.path = path
 
-    def __getitem__(self, item):
-        return self.__store[item]
+    def __getitem__(self, key):
+        return self.__models[key].store
 
     def load(self):
         try:
-            with Editor(self.path, "rb") as file:
+            with open(self.path, "rb") as file:
                 self.__store = pickle.load(file)
 
                 for model in self.__models.values():
@@ -23,12 +22,13 @@ class DataBase:
             pass
 
     def save(self):
-        with Editor(self.path, "wb") as file:
+        with open(self.path, "wb") as file:
             for model in self.__models.values():
                 self.__store[model.__name__] = model.store
 
             pickle.dump(self.__store, file)
 
-    def register(self, model):
-        self.__class__.__models[model.__name__] = model
-        self.__class__.__store.setdefault(model.__name__, model.store)
+    def register(self, *args):
+        for model in args:
+            self.__class__.__models[model.__name__] = model
+            self.__class__.__store.setdefault(model.__name__, model.store)

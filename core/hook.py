@@ -15,7 +15,7 @@ class Hook:
     __registered = {}
 
     def __init__(self, mode: Mode, callback: Callable, *args, **kwargs):
-        assert isinstance(mode, Mode), "mode must be an instance of hook mode. "
+        assert isinstance(mode, Mode), "mode must be an instance of hook mode"
         self.mode = mode.value
 
         assert callable(callback), "callback must be callable !"
@@ -26,6 +26,7 @@ class Hook:
 
         self.__class__.__registered.setdefault(self.mode, [])
         self.__class__.__registered[self.mode].append(self)
+        print(self.__registered)
 
     @classmethod
     @property

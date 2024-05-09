@@ -10,7 +10,7 @@ class RouteStateManager:
             cls.__routes.append(route_name)
 
     @classmethod
-    def get_current_route(cls):
+    def get_current_route(cls) -> str:
         return " > ".join(cls.__routes)
 
     @classmethod
@@ -20,3 +20,12 @@ class RouteStateManager:
 
 class Auth:
     login_status = False
+
+    @classmethod
+    def check_permission(cls, role):
+        print(cls.user)
+        if cls.user.role == 'admin':
+            return True
+        elif cls.user.role == role.value:
+            return True
+

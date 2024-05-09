@@ -4,7 +4,7 @@ from core.hook import Hook, Mode
 class LifeCycle:
     @staticmethod
     def __hook_handler(mode: Mode):
-        for hook in Hook.registered.get(mode.value, []):
+        for hook in Hook.registered.get(mode.value, []):  # noqa
             hook()
 
     def __init__(self):
