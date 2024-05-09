@@ -1,6 +1,6 @@
 from core.state import Auth
 from core.router import Route, Router, Callback
-
+from models import Role
 router = Router(
     Route("Main", description="Maktab 112 - Pharmacy Management", children=[
         Route(
@@ -21,12 +21,15 @@ router = Router(
         Route("Panel",
               condition=lambda: Auth.login_status,
               children=[
-                  Route("Login", callback=Callback('admin.callbacks', 'login')),
-                  Route("Register", callback=Callback('admin.callbacks', 'register')),
-                  Route("In Panel", children=[
-                      Route("Login", callback=Callback('admin.callbacks', 'login')),
-                      Route("Register", callback=Callback('admin.callbacks', 'register')),
-                  ]),
-              ]),
+                Route("Add Drug",
+                      condition=lambda: Auth.login_status and Auth.check_permission(Role.Admin),
+                      callback=Callback('pharmacy.callback', 'add_drug')),
+                Route(
+                    "List of Drugs", 
+                    condition=lambda: Auth.login_status and Auth.check_permission(Role.Doctor), 
+                    callback=Callback('pharmacy.callback', 'list_drug')
+
+              )], 
+              ),
     ])
 )
