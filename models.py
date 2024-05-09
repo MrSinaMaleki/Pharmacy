@@ -3,9 +3,9 @@ import enum
 
 
 class Role(enum.Enum): 
-    Doctor = 'doctor'
-    Staff = 'staff'
-    Admin = 'admin'
+    Doctor = 'Doctor'
+    Staff = 'Staff'
+    Admin = 'Admin'
     Patient = 'patient'
 
 
@@ -36,7 +36,6 @@ class User(Model):
     @role.setter
     def role(self, new_val):
         self._role = new_val
-        print("Changed it successfully")
 
     @property
     def username(self) -> str:
