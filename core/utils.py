@@ -1,6 +1,6 @@
 from os import system as terminal, name as os_name
 
-# 
+
 # def clear():
 #     terminal("cls" if os_name.lower() == "nt" else "clear")
 

@@ -27,6 +27,17 @@ class User(Model):
         self.username = username
         self.password = password
 
+        self._role = "patient"
+
+    @property
+    def role(self):
+        return self._role
+
+    @role.setter
+    def role(self, new_val):
+        self._role = new_val
+        print("Changed it successfully")
+
     @property
     def username(self) -> str:
         return self.__username

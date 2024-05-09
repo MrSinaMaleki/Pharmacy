@@ -28,4 +28,3 @@ class Auth:
             return True
         elif cls.user.role == role.value:
             return True
-

@@ -21,15 +21,17 @@ router = Router(
         Route("Panel",
               condition=lambda: Auth.login_status,
               children=[
-                Route("Add Drug",
-                      condition=lambda: Auth.login_status and Auth.check_permission(Role.Admin),
-                      callback=Callback('pharmacy.callback', 'add_drug')),
+
                 Route(
                     "List of Drugs", 
-                    condition=lambda: Auth.login_status and Auth.check_permission(Role.Doctor), 
-                    callback=Callback('pharmacy.callback', 'list_drug')
+                    condition=lambda: Auth.login_status and Auth.check_permission(Role.Patient),
+                    callback=Callback('pharmacy.callback', 'list_drug'),),
 
-              )], 
-              ),
+                Route("Add Drug",
+                    condition=lambda: Auth.login_status and Auth.check_permission(Role.Admin),
+                    callback=Callback('pharmacy.callback', 'add_drug'))
+
+              ]
+        )
     ])
 )

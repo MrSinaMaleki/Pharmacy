@@ -67,19 +67,22 @@ class Route:
         RouteStateManager.add_route(self.name)
 
         route = self._get_route()
+        # route = self
 
         if self.parent == route:
+            print("we are in if statment")
             RouteStateManager.delete_last_route()
             self.parent()
 
         elif route.children:
+            print("we are in else statment")
             route()
 
         else:
             banner(" ⚜️ " + route.name + " ⚜️ ")
             route.description and print(route.description)
             route.callback and route.callback(route)
-
+            print("we are in else statement. ")
             input("\n\nPress enter to continue ...")
             RouteStateManager.delete_last_route()
             route.parent()
