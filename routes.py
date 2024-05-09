@@ -24,10 +24,10 @@ router = Router(
 
                 Route(
                     "List of Drugs", 
-                    condition=lambda: Auth.login_status and Auth.check_permission(Role.Patient),
+                    condition=lambda: Auth.login_status and True,
                     callback=Callback('pharmacy.callback', 'list_drug'),),
 
-                Route("Add Drug",
+                Route("Add Drug haha!",
                     condition=lambda: Auth.login_status and Auth.check_permission(Role.Admin),
                     callback=Callback('pharmacy.callback', 'add_drug'))
 
