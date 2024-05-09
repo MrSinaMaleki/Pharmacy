@@ -2,7 +2,7 @@ from core.model import Model
 import enum
 
 
-class Role(enum.Enum): 
+class Role(enum.Enum):
     Doctor = 'Doctor'
     Staff = 'Staff'
     Admin = 'Admin'
@@ -11,7 +11,6 @@ class Role(enum.Enum):
 
 class User(Model):
     store = []
-
 
     def validate_username(self, username: str) -> None:
         assert isinstance(username, str) and len(username) >= 4, "Username must be str type and length >= 4"
@@ -68,24 +67,27 @@ class Drug(Model):
                 if new_name == drug.name:
                     raise Exception('name must be unique!')
         return True
-                
 
-    def __init__(self, name, quantity):
+    def __init__(self, name, quantity, takable: bool):
         self.name = name
         self.quantity = quantity
+        self._takeble = takable
+
+    @property
+    def takeble(self):
+        return self._takeble
 
     @property
     def name(self):
         return self._name
-    
+
     @name.setter
     def name(self, new_name):
         if self.validate_name(new_name):
             self._name = new_name
 
-
     def __add__(self, other):
         return self.quantity + other.quantity
-    
+
     def __repr__(self):
-        return f"Drug(name:{self.name!r}, quantity:{self.quantity!r})"
+        return f"Drug(name:{self.name!r}, quantity:{self.quantity!r}, takeable:{self.takeble})"

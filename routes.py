@@ -25,19 +25,19 @@ router = Router(
                 Route(
                     "List of Drugs", 
                     condition=lambda: Auth.login_status and True,
-                    callback=Callback('pharmacy.callback', 'list_drug'),),
+                    callback=Callback('funcs.callback', 'list_drug'),),
 
                 Route("Add Drugs",
                     condition=lambda: Auth.login_status and Auth.check_permission(Role.Staff),
-                    callback=Callback('pharmacy.callback', 'add_drug')),
+                    callback=Callback('funcs.callback', 'add_drug')),
 
                 Route("Prescript Drugs",
                     condition=lambda: Auth.login_status and Auth.check_permission(Role.Doctor),
-                    callback=Callback('pharmacy.callback', 'add_drug')),
+                    callback=Callback('funcs.callback', 'add_drug')),
 
                 Route("Take drugs",
                     condition=lambda: Auth.login_status and Auth.check_permission(Role.Patient),
-                    callback=Callback('pharmacy.callback', 'add_drug')),
+                    callback=Callback('funcs.callback', 'add_drug')),
 
 
               ]
