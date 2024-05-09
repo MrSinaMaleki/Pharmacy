@@ -27,6 +27,15 @@ class User(Model):
         self.password = password
 
         self._role = "patient"
+        self._my_drugs = []
+
+    @property
+    def my_drugs(self):
+        return self._my_drugs
+
+    @my_drugs.setter
+    def my_drugs(self, new_val):
+        self._my_drugs.append(new_val)
 
     @property
     def role(self):

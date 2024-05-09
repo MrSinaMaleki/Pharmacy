@@ -37,7 +37,7 @@ router = Router(
 
                 Route("Take drugs",
                     condition=lambda: Auth.login_status and Auth.check_permission(Role.Patient),
-                    callback=Callback('funcs.callback', 'add_drug')),
+                    callback=Callback('funcs.callback', 'take_drugs')),
 
 
               ]

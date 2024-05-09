@@ -1,8 +1,11 @@
+import pickle
 from time import sleep
 from models import User
 from getpass import getpass
 from core.state import Auth
 from core.utils import safe
+from core.filehandler import Editor
+
 
 
 @safe
@@ -18,7 +21,9 @@ def login(route):
             Auth.login_status = True
             Auth.user = user
             print(f"\n\nWelcome '{user.username.title()}' ⭐ ")
-            sleep(4)
+            sleep(1)
+            with Editor("funcs/current.txt", "w") as file:
+                file.write(username)
             break
     else:
         raise ValueError("Username or password invalid !")
@@ -43,3 +48,5 @@ def register(route):
 def logout(route):
     print("In Logout Callbacks")
     Auth.login_status = False
+    with Editor("funcs/current.txt", "w") as file:
+        file.write("")
